@@ -1,0 +1,15 @@
+.site-header { display:block; padding:8px 10px; background:#3b5998;   }
+.brand { margin-bottom:6px; }
+.brand a { color:#ffffff; text-decoration:none; font-weight:bold; font-size:18px; }
+.nav { display:block; }
+.nav a { display:inline-block; margin-right:10px; color:#ffffff; text-decoration:none; font-weight:500; font-size:14px; padding:2px 0; }
+.nav .btn { background:transparent; color:#ffffff; padding:0; border-radius:0; }
+.nav a:hover { text-decoration:underline; }
+.site-main { padding:20px; }
+.site-footer { text-align:center; color:#6b7280; padding:16px; }
+
+/* flash messages */
+.alert { padding:10px 12px; border-radius:6px; margin:10px 0; font-size:14px; }
+.alert-success { background:#ecfdf5; color:#065f46; border:1px solid #a7f3d0; }
+.alert-error { background:#fef2f2; color:#991b1b; border:1px solid #fecaca; }
+

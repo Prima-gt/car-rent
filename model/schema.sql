@@ -1,0 +1,74 @@
+CREATE TABLE IF NOT EXISTS users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  email VARCHAR(120) NOT NULL UNIQUE,
+  password VARCHAR(100) NOT NULL,
+  role ENUM('customer','driver','admin') DEFAULT 'customer',
+  phone VARCHAR(20) NULL,
+  approved TINYINT(1) DEFAULT 1
+);
+
+CREATE TABLE IF NOT EXISTS cars (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  model VARCHAR(100) NOT NULL,
+  owner VARCHAR(100) NOT NULL,
+  image VARCHAR(200) NULL,
+  driver_id INT NULL,
+  FOREIGN KEY (driver_id) REFERENCES users(id) ON DELETE SET NULL
+);
+
+CREATE TABLE IF NOT EXISTS rides (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NOT NULL,
+  car_id INT NULL,
+  driver_id INT NULL,
+  pickup DATE NOT NULL,
+  dropoff DATE NOT NULL,
+  status ENUM('pending','accepted','cancelled','completed') DEFAULT 'pending',
+  total_cost DECIMAL(10,2) DEFAULT 0,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+  FOREIGN KEY (car_id) REFERENCES cars(id) ON DELETE SET NULL,
+  FOREIGN KEY (driver_id) REFERENCES users(id) ON DELETE SET NULL
+);
+
+CREATE TABLE IF NOT EXISTS ratings (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  ride_id INT NOT NULL,
+  driver_id INT NOT NULL,
+  stars INT NOT NULL,
+  review VARCHAR(255) DEFAULT '',
+  FOREIGN KEY (ride_id) REFERENCES rides(id) ON DELETE CASCADE,
+  FOREIGN KEY (driver_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS messages (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  ride_id INT NOT NULL,
+  sender_id INT NOT NULL,
+  receiver_id INT NOT NULL,
+  content VARCHAR(255) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  is_read TINYINT(1) DEFAULT 0,
+  FOREIGN KEY (ride_id) REFERENCES rides(id) ON DELETE CASCADE,
+  FOREIGN KEY (sender_id) REFERENCES users(id) ON DELETE CASCADE,
+  FOREIGN KEY (receiver_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS complaints (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  driver_id INT NOT NULL,
+  subject VARCHAR(120) NOT NULL,
+  details VARCHAR(255) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (driver_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS reset_tokens (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NOT NULL,
+  token VARCHAR(64) NOT NULL,
+  expires_at DATETIME NOT NULL,
+  INDEX(token),
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+

@@ -1,0 +1,4 @@
+.forget-main { display: grid; align-items: center; justify-content: center; }
+#user, #pass { border-radius: 6px; padding: 10px; }
+.button { margin-top: 10px; height: 40px; border-radius: 6px; background-color: #C6D870; }
+.from { display: grid; align-items: center; justify-content: center; }

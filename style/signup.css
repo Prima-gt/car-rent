@@ -1,0 +1,65 @@
+/* this is the signup page design */
+.form-title{
+    align-items: center;
+    font-size: large;
+    font-weight: bold;
+    text-align: center;
+    color: greenyellow;
+    
+}
+.singup-main-body {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+/* form body */
+.form{
+    padding: 10px ;
+    margin: 10px;
+    gap: 10px;
+}
+
+#username{
+    padding: 10px;
+    font-size: 1rem;
+    font-weight: normal;
+    margin-bottom: 5px;
+    border-radius: 10px;
+}
+#email{
+    padding: 10px;
+    font-size: 1rem;
+    font-weight: normal;
+    margin-bottom: 5px;
+    border-radius: 10px;
+}
+#contact{
+    padding: 10px;
+    font-size: 1rem;
+    font-weight: normal;
+    margin-bottom: 5px;
+    border-radius: 10px;
+}
+#password{
+    padding: 10px;
+    font-size: 1rem;
+    font-weight: normal;
+    margin-bottom: 5px;
+    border-radius: 10px;
+}
+#confirmPassword{
+    padding: 10px;
+    font-size: 1rem;
+    font-weight: normal;
+    margin-bottom: 5px;
+    border-radius: 10px;
+}
+
+.btn-submit {
+  margin-top: 15px;
+  height: 50px;
+  border-radius: 10px;
+  background-color: #32D34B;
+  width: 100%;
+}
