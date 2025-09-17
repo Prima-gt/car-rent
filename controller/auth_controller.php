@@ -8,17 +8,20 @@ if(isset($_POST['action']) && $_POST['action']==='login'){
   $password = $_POST['password'] ?? '';
   $u = user_find_by_email($email);
   if($u && $u['password']===$password){
-    if(($u['role']==='driver') && (int)($u['approved'] ?? 0)!==1){
+   if(($u['role']==='driver') && (int)($u['approved'] ?? 0)!==1){
+      $_SESSION['flash_error'] = 'Your driver account is pending approval.';
       header('Location: ../login.php');
       exit;
-    }
+    } 
     $_SESSION['user_id']=$u['id'];
     $_SESSION['name']=$u['name'];
     $_SESSION['email']=$u['email'];
     $_SESSION['role']=$u['role'] ?? 'customer';
+    $_SESSION['flash_success'] = 'Logged in successfully.';
     header('Location: ../home.php');
     exit;
   }
+  $_SESSION['flash_error'] = 'Invalid email or password.';
   header('Location: ../login.php');
   exit;
 }
@@ -26,33 +29,32 @@ if(isset($_POST['action']) && $_POST['action']==='login'){
 if(isset($_POST['action']) && $_POST['action']==='signup'){
   $firstname = trim($_POST['firstname'] ?? '');
   $lastname = trim($_POST['lastname'] ?? '');
-  $email = trim($_POST['email'] ?? '');
+  $email = strtolower(trim($_POST['email'] ?? ''));
   $password = $_POST['password'] ?? '';
   $name = trim($firstname . ' ' . $lastname);
   $role = isset($_POST['role']) ? $_POST['role'] : 'customer';
-  $id = user_create($name,$email,$password,$role);
-  if($role==='driver'){
-    $car_model = trim($_POST['car_model'] ?? '');
-    $car_owner = trim($_POST['car_owner'] ?? '');
-    $imagePath=null;
-    if(isset($_FILES['car_image']) && is_uploaded_file($_FILES['car_image']['tmp_name'])){
-      $ext=pathinfo($_FILES['car_image']['name'], PATHINFO_EXTENSION);
-      $safeName='drv_'.time().'_'.rand(100,999).'.'.preg_replace('/[^a-zA-Z0-9]/','',$ext);
-      $dest=dirname(__DIR__).'/pic/'.$safeName;
-      if(move_uploaded_file($_FILES['car_image']['tmp_name'],$dest)){
-        $imagePath='pic/'.$safeName;
-      }
-    }
-    if($car_model!=='' && $car_owner!==''){
-      car_create($car_model,$car_owner,$id,$imagePath);
-    }
+  // Prevent duplicate email error by checking first
+  $existing = user_find_by_email($email);
+  if($existing){
+    $_SESSION['flash_error'] = 'An account with this email already exists.';
+    header('Location: ../signup.php');
+    exit;
   }
-  $_SESSION['user_id']=$id;
-  $_SESSION['name']=$name;
-  $_SESSION['email']=$email;
-  $_SESSION['role']=$role;
-  header('Location: ../home.php');
-  exit;
+
+  $id = user_create($name,$email,$password,$role);
+  if($id && $id > 0){
+    $_SESSION['user_id']=$id;
+    $_SESSION['name']=$name;
+    $_SESSION['email']=$email;
+    $_SESSION['role']=$role;
+    $_SESSION['flash_success'] = ($role==='driver') ? 'Signup successful. Your driver account awaits approval.' : 'Signup successful. Welcome!';
+    header('Location: ../home.php');
+    exit;
+  } else {
+    $_SESSION['flash_error'] = 'Could not create account. Please try again.';
+    header('Location: ../signup.php');
+    exit;
+  }
 }
 
 header('Location: ../login.php');

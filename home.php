@@ -1,5 +1,6 @@
 <?php
 session_start(); 
+
 if(!isset($_SESSION['user_id'])){
   header('Location: ./login.php'); 
   exit; 
@@ -7,7 +8,30 @@ if(!isset($_SESSION['user_id'])){
 $pageTitle='Home'; 
 
 require_once __DIR__ . '/model/car_model.php'; 
-include __DIR__ . '/includes/header.php'; ?>
+require_once __DIR__ . '/model/user_model.php';
+$user = user_find_by_id($_SESSION['user_id']);
+
+include __DIR__ . '/includes/header.php';
+ ?>
+  <!-- User Welcome Section -->
+  <div class="box" style="max-width: 600px; margin-bottom: 20px;">
+    <div style="display: flex; align-items: center; gap: 15px;">
+      <div style="flex-shrink: 0;">
+        <?php if(isset($user['profile_image']) && $user['profile_image']): ?>
+          <img src="<?php echo htmlspecialchars($user['profile_image']); ?>" alt="Profile" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 2px solid #e5e7eb;">
+        <?php else: ?>
+          <div style="width: 60px; height: 60px; border-radius: 50%; background: #f3f4f6; border: 2px solid #e5e7eb; display: flex; align-items: center; justify-content: center; color: #6b7280; font-weight: bold; font-size: 20px;">
+            <?php echo strtoupper(substr($user['name'] ?? 'U', 0, 1)); ?>
+          </div>
+        <?php endif; ?>
+      </div>
+      <div>
+        <h2 style="margin: 0; color: #1f2937; font-size: 24px;">Welcome back, <?php echo htmlspecialchars($user['name'] ?? 'User'); ?>!</h2>
+        <p style="margin: 5px 0 0 0; color: #6b7280; font-size: 14px;">Ready to find your perfect ride?</p>
+      </div>
+    </div>
+  </div>
+
   <div class="box home-wrap">
     <div class="toolbar"> 
       <a class="pill active" href="#">All</a>
@@ -16,7 +40,8 @@ include __DIR__ . '/includes/header.php'; ?>
     </div>
     
 
-    <?php $cars = cars_all_public(); if(!empty($cars)): ?>
+    <?php $cars = cars_all_public();
+     if(!empty($cars)): ?>
       <hr>
       <div class="cars-title">Available Cars</div>
       <div class="cars-grid" id="carsList">
@@ -36,19 +61,6 @@ include __DIR__ . '/includes/header.php'; ?>
       </div>
     <?php endif; ?>
   </div>
-  <script>
-    (function(){
-      var s=document.getElementById('search');
-      if(!s) return;
-      var items=document.querySelectorAll('.car-item');
-      s.addEventListener('input',function(){
-        var q=this.value.toLowerCase();
-        items.forEach(function(el){
-          var name=el.getAttribute('data-name')||'';
-          el.style.display = name.indexOf(q)>-1 ? '' : 'none';
-        });
-      });
-    })();
-  </script>
+ 
 <?php include __DIR__ . '/includes/footer.php'; ?>
 

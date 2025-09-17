@@ -7,9 +7,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
     $safe=mysqli_real_escape_string($conn, strtolower($email));
     $uRes=mysqli_query($conn,"SELECT id FROM users WHERE LOWER(email)='$safe' LIMIT 1");
     $u=mysqli_fetch_assoc($uRes);
-    // create table if not exists
-    //mysqli_query($conn,"CREATE TABLE IF NOT EXISTS reset_tokens (id INT AUTO_INCREMENT PRIMARY KEY, user_id INT NOT NULL, token VARCHAR(64) NOT NULL, expires_at DATETIME NOT NULL, INDEX(token), FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE)");
-    if($u){
+     if($u){
       $token=bin2hex(random_bytes(16));
       $uid=(int)$u['id'];
       $exp=date('Y-m-d H:i:s', time()+3600);
@@ -31,14 +29,55 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Forgot Password</title>
     <link rel="stylesheet" href="./css/ForgotPassword.css">
+    <link rel="stylesheet" href="./css/login.css">
+    <link rel="stylesheet" href="./css/layout.css">
   </head>
   <body class="forget-main">
     <p><b>Enter your email to receive reset link</b></p>
     <?php if(isset($_GET['success'])): ?><div class="alert alert-success"><?php echo htmlspecialchars($_GET['success']); ?></div><?php endif; ?>
-    <form method="POST" style="display:grid;gap:8px;">
-      <input type="text" name="email" placeholder="Email">
+    
+    <?php
+      if(isset($_GET['error'])){ ?><div class="alert alert-error"
+      ><?php echo htmlspecialchars($_GET['error']); ?></div><?php
+      }
+
+?>
+      <form method="POST" style="display:grid;gap:8px;" onsubmit="return validateForgotPassword();">
+      <input type="text" id="email" name="email" placeholder="Email" value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>">
+      <div id="emailError" class="error"></div>
+      <div id="formError" class="error" style="font-weight: bold;"></div>
       <button type="submit" class="button">Send Reset Link</button>
     </form>
+
+    <script>
+      function validateForgotPassword(){
+        var email = document.getElementById('email').value.trim();
+        var emailError = document.getElementById('emailError');
+        var formError = document.getElementById('formError');
+        
+        emailError.innerHTML = '';
+        formError.innerHTML = '';
+        
+        var valid = true;
+        
+        if(email === ''){
+          emailError.innerHTML = 'Email is required.';
+          valid = false;
+        } else {
+          var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if(!emailPattern.test(email)){
+            emailError.innerHTML = 'Enter a valid email address.';
+            valid = false;
+          }
+        }
+        
+        if(!valid){
+          formError.innerHTML = 'Please fix the errors above.';
+        }
+        
+        return valid;
+      }
+    </script>
   </body>
   </html>
 

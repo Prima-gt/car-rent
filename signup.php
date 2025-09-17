@@ -2,8 +2,33 @@
 session_start();
 if(isset($_SESSION['user_id'])){
   header('Location: ./home.php'); 
-  exit; 
+  exit;
+  
+  if ($isValid) {
+    if (isset($_FILES['profile_picture']) && $_FILES['profile_picture']['error'] === UPLOAD_ERR_OK) {
+        $uploadDir = '../assets/profile_picture/';
+        
+        if (!is_dir($uploadDir)) {
+            mkdir($uploadDir, 0777, true);
+        }
+
+        $fileName = uniqid() . '_' . basename($_FILES['profile_picture']['name']);
+        $uploadFile = $uploadDir . $fileName;
+
+        if (move_uploaded_file($_FILES['profile_picture']['tmp_name'], $uploadFile)) {
+            $profilePicture = $fileName;
+            $_SESSION['user_pic'] = $fileName; 
+        } else {
+            $errorURL .= "&e10=Failed to upload profile picture.";
+            $isValid = false;
+        }
+    } else {
+        $profilePicture = '';
+    }
 }
+  
+}
+
 
 ?>
 <!DOCTYPE html>
@@ -13,10 +38,22 @@ if(isset($_SESSION['user_id'])){
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sign Up</title>
   <link rel="stylesheet" href="./css/login.css">
+  <link rel="stylesheet" href="./css/layout.css">
 </head>
 <body>
   <div class="box" style="max-width: 450px;">
     <div class="header">Create New Account</div>
+    <?php 
+      $flashSuccess = $_SESSION['flash_success'] ?? null; 
+      $flashError = $_SESSION['flash_error'] ?? null; 
+    ?>
+    <?php if($flashSuccess): ?>
+      <div class="alert alert-success"><?php echo htmlspecialchars($flashSuccess); ?></div>
+    <?php endif; ?>
+    <?php if($flashError): ?>
+      <div class="alert alert-error"><?php echo htmlspecialchars($flashError); ?></div>
+    <?php endif; ?>
+    <?php unset($_SESSION['flash_success'], $_SESSION['flash_error']); ?>
 
     <form action="./controller/auth_controller.php" method="POST" onsubmit="return validateForm();" enctype="multipart/form-data">
       <input type="hidden" name="action" value="signup" />

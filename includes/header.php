@@ -46,10 +46,17 @@ if(session_status()===PHP_SESSION_NONE){
     </nav>
       </center>
   <main class="site-main">
-    <?php if(isset($_GET['success'])): ?>
-      <div class="alert alert-success"><?php echo htmlspecialchars($_GET['success']); ?></div>
+    <?php 
+      $flashSuccess = $_SESSION['flash_success'] ?? null; 
+      $flashError = $_SESSION['flash_error'] ?? null; 
+      if(isset($_GET['success'])){ $flashSuccess = $_GET['success']; }
+      if(isset($_GET['error'])){ $flashError = $_GET['error']; }
+    ?>
+    <?php if($flashSuccess): ?>
+      <div class="alert alert-success"><?php echo htmlspecialchars($flashSuccess); ?></div>
     <?php endif; ?>
-    <?php if(isset($_GET['error'])): ?>
-      <div class="alert alert-error"><?php echo htmlspecialchars($_GET['error']); ?></div>
+    <?php if($flashError): ?>
+      <div class="alert alert-error"><?php echo htmlspecialchars($flashError); ?></div>
     <?php endif; ?>
+    <?php unset($_SESSION['flash_success'], $_SESSION['flash_error']); ?>
 

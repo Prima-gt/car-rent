@@ -19,18 +19,6 @@ $pageTitle='Change Password';
       <?php if(isset($_GET['token'])): ?><input type="hidden" name="token" value="<?php echo htmlspecialchars($_GET['token']); ?>"><?php endif; ?>
       <button type="submit" class="button">Save Password</button>
     </form>
-
-    <script>
-      document.getElementById('savepassForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-        var password = document.getElementById('user').value;
-        var confirmPassword = document.getElementById('pass').value;
-        if(password.length<6||password!==confirmPassword){
-          alert('Passwords must match and be at least 6 chars');
-          return false;
-        }
-        return true;
-      });
-    </script>
+ 
   </div>
 <?php include __DIR__ . '/includes/footer.php'; ?>

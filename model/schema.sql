@@ -5,6 +5,7 @@ CREATE TABLE IF NOT EXISTS users (
   password VARCHAR(100) NOT NULL,
   role ENUM('customer','driver','admin') DEFAULT 'customer',
   phone VARCHAR(20) NULL,
+  profile_image VARCHAR(255) NULL,
   approved TINYINT(1) DEFAULT 1
 );
 
@@ -72,3 +73,6 @@ CREATE TABLE IF NOT EXISTS reset_tokens (
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
+
+
+  -- ALTER TABLE users ADD COLUMN profile_image VARCHAR(255) NULL AFTER phone;
