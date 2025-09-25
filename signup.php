@@ -132,7 +132,7 @@ if(isset($_SESSION['user_id'])){
     <a href="./login.php" class="link">Back to Login</a>
   </div>
 
-  <script src="./js/signup.js"></script>
+  <!-- <script src="./js/signup.js"></script> -->
   <script>
     (function(){
       var role=document.getElementById('role');

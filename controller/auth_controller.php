@@ -6,6 +6,11 @@ require_once __DIR__ . '/../model/car_model.php';
 if(isset($_POST['action']) && $_POST['action']==='login'){
   $email = strtolower(trim($_POST['email'] ?? ''));
   $password = $_POST['password'] ?? '';
+  if(empty($email) || empty($password)){
+    $_SESSION['flash_error'] = 'Email and password are required.';
+    header('Location: ../login.php');
+    exit;
+  }
   $u = user_find_by_email($email);
   if($u && $u['password']===$password){
    if(($u['role']==='driver') && (int)($u['approved'] ?? 0)!==1){
@@ -33,6 +38,11 @@ if(isset($_POST['action']) && $_POST['action']==='signup'){
   $password = $_POST['password'] ?? '';
   $name = trim($firstname . ' ' . $lastname);
   $role = isset($_POST['role']) ? $_POST['role'] : 'customer';
+  if(empty($firstname) || empty($lastname) || empty($email) || empty($password)){
+    $_SESSION['flash_error'] = 'All fields are required.';
+    header('Location: ../signup.php');
+    exit;
+  }
   // Prevent duplicate email error by checking first
   $existing = user_find_by_email($email);
   if($existing){

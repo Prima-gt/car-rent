@@ -2,6 +2,10 @@
 require_once __DIR__ . '/model/db.php';
 if($_SERVER['REQUEST_METHOD']==='POST'){
   $email=trim($_POST['email'] ?? '');
+  if(empty($email)){
+    header('Location: ./ForgotPassword.php?error='.urlencode('Email is required.'));
+    exit;
+  }
   if($email!==''){
     $conn=db_connect();
     $safe=mysqli_real_escape_string($conn, strtolower($email));
@@ -42,14 +46,14 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
       }
 
 ?>
-      <form method="POST" style="display:grid;gap:8px;" onsubmit="return validateForgotPassword();">
+      <form method="POST" style="display:grid;gap:8px;"  >
       <input type="text" id="email" name="email" placeholder="Email" value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>">
       <div id="emailError" class="error"></div>
       <div id="formError" class="error" style="font-weight: bold;"></div>
       <button type="submit" class="button">Send Reset Link</button>
     </form>
 
-    <script>
+    <!-- <script>
       function validateForgotPassword(){
         var email = document.getElementById('email').value.trim();
         var emailError = document.getElementById('emailError');
@@ -77,7 +81,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
         
         return valid;
       }
-    </script>
+    </script> -->
   </body>
   </html>
 
