@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Complaint</title>
+    <link rel="stylesheet" href="..\assets\CSS\complaint.css">
+</head>
+<body>
+    <div class="header-container">
+        <h1 class="header-title">Admin Complaint</h1>
+        <div class="header-buttons">
+            <a href="home.html" class="header-btn back-btn">Back</a>
+            
+        </div>
+    </div>
+    <div class="content-container">
+        <div class="main-content">
+            <div class="complaint-box">
+                <h2 class="section-heading">File a Complaint</h2>
+                <form class="complaint-form">
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="complaint-details">Details</label>
+                        <textarea id="complaint-details" name="complaint-details" rows="6" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Submit</button>
+                </form>
+            </div>
+            <div class="history-box">
+                <h2 class="section-heading">Complaint History</h2>
+                <div class="complaint-history">
+                    <div class="history-item">
+                        <p class="history-subject">Rider was rude</p>
+                        <p class="history-status status-resolved">Resolved</p>
+                    </div>
+                    <div class="history-item">
+                        <p class="history-subject">Payment of ID: #E5F6G7H8 not recieved</p>
+                        <p class="history-status status-pending">Pending</p>
+                    </div>
+                    <div class="history-item">
+                        <p class="history-subject">Map Frozen</p>
+                        <p class="history-status status-resolved">Resolved</p>
+                    </div>
+                    <div class="history-item">
+                        <p class="history-subject">Crashes when accepting ride</p>
+                        <p class="history-status status-resolved">Pending</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

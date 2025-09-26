@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rider Information</title>
+    <link rel="stylesheet" href="..\assets\CSS\ride_info.css">
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyANmV3CdjF5bav4Xh6xn1LBSrgMeZADAfc&callback=initMap" async defer></script>
+</head>
+<body>
+    <div class="header-container">
+        <h1 class="header-title">Rider Information</h1>
+        <div class="header-links">
+            <a href="home.php" class="header-link">Back</a>
+        </div>
+    </div>
+    <div class="main-content">
+        <div class="left-section">
+            <div class="rider-info-box">
+                <div class="rider-details-header">
+                    <img src="..\assets\profile_picture\default.jpg" alt="Rider Profile Picture" class="profile-pic">
+                    <div class="rider-header-text">
+                        <h2 class="rider-name">Shakib Ali</h2>
+                        <p class="current-rider">Current Rider</p>
+                    </div>
+                </div>
+                <div class="rider-info-grid">
+                    <div class="info-item">
+                        <p class="info-label">Trip ID</p>
+                        <p class="info-value">#O8IWH19</p>
+                    </div>
+                    <div class="info-item">
+                        <p class="info-label">Distance</p>
+                        <p class="info-value">5.2 km away</p>
+                    </div>
+                    <div class="info-item">
+                        <p class="info-label">Pick-up</p>
+                        <p class="info-value">Kuratoli,Kuril</p>
+                    </div>
+                    <div class="info-item">
+                        <p class="info-label">Destination</p>
+                        <p class="info-value">Motijheel</p>
+                    </div>
+                    <div class="info-item">
+                        <p class="info-label">Contact</p>
+                        <p class="info-value">018234098</p>
+                    </div>
+                </div>
+            </div>
+            <div class="chat-box">
+                <h2 class="chat-header">Chat with Rider</h2>
+                <div class="chat-messages">
+                    <div class="message-sent">
+                        I'm about 2 minutes away.
+                    </div>
+                    <div class="message-received">
+                        Ok waiting!
+                    </div>
+                </div>
+                <div class="chat-input-container">
+                    <input type="text" placeholder="Type your message..." class="chat-input">
+                    <button class="chat-send-btn">Send</button>
+                </div>
+            </div>
+            <div class="earning-box">
+                <h2 class="earning-header">Ride Earnings</h2>
+                <p class="earning-amount">532Tk</p>
+                <p class="earning-note">Based on estimated distance</p>
+            </div>
+        </div>
+        <div class="right-section">
+            <div class="map-container">
+                <div id="map"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    function initMap() {
+        const map = new google.maps.Map(document.getElementById("map"), {
+            center: { lat: 23.8221, lng: 90.4274 },
+            zoom: 12,
+        });
+    }
+</script>
+
+</body>
+</html>

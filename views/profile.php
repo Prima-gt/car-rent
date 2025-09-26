@@ -1,80 +1,161 @@
-<?php 
-$pageTitle='Profile'; 
-session_start(); 
-if(!isset($_SESSION['user_id'])){
-  header('Location: ./login.php'); 
-  exit; 
+<?php
+session_start();
+require_once('../models/userModel.php');
+
+if (!isset($_SESSION['email'])) {
+    header('Location: login.php');
+    exit();
 }
 
-require_once 'model/user_model.php';
-$user = user_find_by_id($_SESSION['user_id']);
+$email = $_SESSION['email'];
 
-include __DIR__ . '/includes/header.php'; 
+$user = getUserByEmail($email);
+
+if ($user) {
+    $firstName = $user['Fname'];
+    $lastName = $user['Lname'];
+    $dob = $user['DoB'];
+    $license = $user['License'];
+} else {
+    header('Location: home.php?error=user_not_found');
+    exit();
+}
 ?>
-  <div class="box" style="max-width: 500px;">
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Driver Profile</title>
+    <link rel="stylesheet" href="..\assets\CSS\login.css">
+    <style>
+        body {
+            background-color: #DBE4C9;
+        }
+        .profile-container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #556B2F;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            color: #EFF5D2;
+        }
+        .profile-header {
+            font-size: 28px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #DCFFB7;
+        }
+        .profile-form .form-group {
+            margin-bottom: 15px;
+        }
+        .profile-form label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .profile-form input[type="text"],
+        .profile-form input[type="email"],
+        .profile-form input[type="date"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            background-color: #EFF5D2;
+            color: #27391C;
+        }
+        .update-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #C6D870;
+            color: #0A400C;
+            border: none;
+            border-radius: 6px;
+            font-size: 17px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .update-btn:hover {
+            background-color: #D9EDBF;
+        }
+        .header-container {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #556B2F;
+            color: #DCFFB7;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .header-link {
+            text-decoration: none;
+            color: #DCFFB7;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        .header-link:hover {
+            text-decoration: underline;
+        }
+        .box {
+            max-width: 450px;
+            margin-top: 80px; 
+        }
+        .header {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header-container">
+    <a href="home.php" class="header-link">Back to Home</a>
+</div>
+
+<div class="box" style="max-width: 450px;">
     <div class="header">My Profile</div>
-
-    <form method="POST" action="./controller/profile_controller.php" enctype="multipart/form-data" onsubmit="return validateProfile();">
-      <div class="form-group">
-        <label for="name">Full Name</label>
-        <input type="text" id="name" name="name" value="<?php echo isset($user['name']) ? htmlspecialchars($user['name']) : '';?>">
-        <span id="nameError" class="error"></span>
-      </div>
-
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="text" id="email" name="email" value="<?php echo isset($user['email']) ? htmlspecialchars($user['email']) : '';?>">
-        <span id="emailError" class="error"></span>
-      </div>
-
-      <div class="form-group">
-        <label for="phone">Phone</label>
-        <input type="text" id="phone" name="phone" value="<?php echo isset($user['phone']) ? htmlspecialchars($user['phone']) : '';?>">
-        <span id="phoneError" class="error"></span>
-      </div>
-
-      <div class="form-group">
-        <label>Profile Image</label>
-        <div style="margin-bottom:10px;">
-          <?php 
-            $currentAvatar = isset($user['profile_image']) && $user['profile_image'] ? $user['profile_image'] : null; 
-          ?>
-          <?php if($currentAvatar): ?>
-            <img src="<?php echo htmlspecialchars($currentAvatar); ?>" alt="Profile Image" style="width:120px;height:120px;object-fit:cover;border-radius:60px;border:1px solid #ddd;" />
-          <?php else: ?>
-            <div style="width:120px;height:120px;border-radius:60px;background:#f0f0f0;border:1px solid #ddd;display:flex;align-items:center;justify-content:center;color:#888;">No Image</div>
-          <?php endif; ?>
+    <form class="profile-form" action="../controllers/profile_action.php" method="POST" onsubmit="return validateProfile();">
+        <div class="form-group">
+            <label for="firstname">First Name</label>
+            <input type="text" id="firstname" name="firstname" value="<?php echo htmlspecialchars($firstName); ?>">
+            <span><?php echo $_GET['e1'] ?? '' ?></span>
+            <div id="FirstError" class="error"></div>
         </div>
-        <input type="file" id="profile_image" name="profile_image" accept="image/png, image/jpeg, image/jpg, image/webp, image/gif">
-        <span id="imageError" class="error"></span>
-      </div>
-
-      <span id="formError" class="error"></span>
-
-      <button type="submit" class="login-btn" name="submit">Save</button>
+        <div class="form-group">
+            <label for="lastname">Last Name</label>
+            <input type="text" id="lastname" name="lastname" value="<?php echo htmlspecialchars($lastName); ?>">
+            <span><?php echo $_GET['e2'] ?? '' ?></span>
+            <div id="lastError" class="error"></div>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($email); ?>" readonly>
+            <span><?php echo $_GET['e3'] ?? '' ?></span>
+            <div id="emailError" class="error"></div>
+        </div>
+        <div class="form-group">
+            <label for="dob">Date of Birth</label>
+            <input type="date" id="dob" name="dob" value="<?php echo htmlspecialchars($dob); ?>">
+            <span><?php echo $_GET['e4'] ?? '' ?></span>
+            <div id="dobError" class="error"></div>
+        </div>
+        <div class="form-group">
+            <label for="license">License Number</label>
+            <input type="text" id="license" name="license" value="<?php echo htmlspecialchars($license); ?>">
+            <span><?php echo $_GET['e5'] ?? '' ?></span>
+            <div id="licenseError" class="error"></div>
+        </div>
+        <span id="formError" class="error"></span>
+        <button type="submit" id="updateBtn" class="login-btn">Update Profile</button>
     </form>
-
-    <a href="./home.php" class="link">Back to Home</a>
-    <a href="./logout.php" class="link">Logout</a>
-  </div>
-
-  <script>
-    function validateProfile(){
-      var name = document.getElementById('name').value.trim();
-      var email = document.getElementById('email').value.trim();
-      var phone = document.getElementById('phone').value.trim();
-      var valid = true;
-      document.getElementById('nameError').innerHTML='';
-      document.getElementById('emailError').innerHTML='';
-      document.getElementById('phoneError').innerHTML='';
-      document.getElementById('formError').innerHTML='';
-      if(name.length<2){document.getElementById('nameError').innerHTML='Enter your name.';valid=false;}
-      var emailPattern=/^[^\s@]+@[^\s@]+\.[^\s@]+$/; 
-      if(!emailPattern.test(email)){document.getElementById('emailError').innerHTML='Enter a valid email.';valid=false;}
-      if(phone.length<6){document.getElementById('phoneError').innerHTML='Enter valid phone.';valid=false;}
-      if(!valid){document.getElementById('formError').innerHTML='Please fix the above errors.';}
-      return valid;
-    }
-  </script>
-<?php include __DIR__ . '/includes/footer.php'; ?>
-
+</div>
+<script src="..\assets\Javascript\profile.js"></script>
+</body>
+</html>

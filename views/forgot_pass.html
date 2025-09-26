@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Forgot Password</title>
+   <link rel="stylesheet" href="..\assets\CSS\login.css">
+</head>
+<body>
+
+  <div class="box">
+    <div class="header">Reset Password</div>
+
+    <form action="reset" method="post">
+      <div class="form-group">
+        <label for="email">Email </label>
+        <input type="text" id="email" name="email">
+         <span id="email-msg"></span>
+        <span id="emailError" class="error"></span>
+        
+      </div>
+
+      <button type="submit" class="login-btn">Send Code</button>
+      
+
+      <hr>
+
+      <a href="login.php" class="link">Back to Login</a>
+    </form>
+  </div>
+
+</body>
+</html>
