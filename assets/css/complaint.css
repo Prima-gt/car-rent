@@ -1,0 +1,151 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #DBE4C9;
+    margin: 0;
+    padding: 0;
+}
+
+.header-container {
+    background: #556B2F;
+    color: #DCFFB7;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-title {
+    font-size: 28px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.header-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header-btn {
+    text-decoration: none;
+    color: #556B2F;
+    background-color: #C6D870;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.header-btn:hover {
+    background-color: #D9EDBF;
+}
+
+.content-container {
+    padding: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+    color: #556B2F;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.complaint-box,
+.history-box {
+    background: #556B2F;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.section-heading {
+    font-size: 24px;
+    font-weight: bold;
+    color: #DCFFB7;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #EFF5D2;
+}
+
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+    background-color: #EFF5D2;
+    color: #27391C;
+}
+
+textarea {
+    resize: vertical;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #C6D870;
+    color: #0A400C;
+    border: none;
+    border-radius: 6px;
+    font-size: 17px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.submit-btn:hover {
+    background-color: #D9EDBF;
+}
+
+.complaint-history {
+    max-height: 200px; 
+    overflow-y: auto;
+    color: #DCFFB7;
+}
+
+.history-item {
+    background-color: #4C622C;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.history-item:last-child {
+    margin-bottom: 0;
+}
+
+.history-subject {
+    font-weight: bold;
+    margin: 0 0 5px;
+    color: #DCFFB7;
+}
+
+.history-status {
+    font-size: 14px;
+    margin: 0;
+}
+
+.status-resolved {
+    color: #C6D870;
+}
+
+.status-pending {
+    color: #DCFFB7;
+}

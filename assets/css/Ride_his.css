@@ -1,0 +1,149 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #DBE4C9;
+    margin: 0;
+    padding: 0;
+}
+
+.header-container {
+    background: #556B2F;
+    color: #DCFFB7;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-title {
+    font-size: 28px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.header-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header-btn {
+    text-decoration: none;
+    color: #556B2F;
+    background-color: #C6D870;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.header-btn:hover {
+    background-color: #D9EDBF;
+}
+
+.content-container {
+    padding: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.section-heading {
+    font-size: 24px;
+    font-weight: bold;
+    color: #556B2F;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.history-container {
+    background-color: #556B2F;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    height: 600px;
+    overflow-y: auto;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.ride-card {
+    background-color: #6e8841;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    color: #DCFFB7;
+}
+
+.ride-card:last-child {
+    margin-bottom: 0;
+}
+
+.rider-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.rider-name {
+    font-size: 22px;
+    font-weight: bold;
+    margin: 0;
+    color: #DCFFB7;
+}
+
+.trip-id {
+    font-size: 14px;
+    margin: 0;
+    color: #EFF5D2;
+}
+
+.ride-details {
+    flex-basis: 50%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.detail-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.detail-label {
+    font-size: 12px;
+    color: #EFF5D2;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.detail-value {
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+}
+
+.earning-info {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+}
+
+.earning-amount {
+    font-size: 22px;
+    font-weight: bold;
+    margin: 0;
+    color: #DCFFB7;
+}
+
+.distance {
+    font-size: 14px;
+    margin: 0;
+    color: #EFF5D2;
+}
