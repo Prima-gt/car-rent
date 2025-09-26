@@ -7,8 +7,8 @@ if(!isset($_SESSION['user_id'])){
 }
 $pageTitle='Home'; 
 
-require_once __DIR__ . '/model/car_model.php'; 
-require_once __DIR__ . '/model/user_model.php';
+require_once 'model/car_model.php'; 
+require_once 'model/user_model.php';
 $user = user_find_by_id($_SESSION['user_id']);
 
 include __DIR__ . '/includes/header.php';

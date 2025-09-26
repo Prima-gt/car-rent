@@ -37,8 +37,8 @@ if(isset($_SESSION['user_id'])){
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sign Up</title>
-  <link rel="stylesheet" href="./css/login.css">
-  <link rel="stylesheet" href="./css/layout.css">
+  <link rel="stylesheet" href="./assets/css/login.css">
+  <link rel="stylesheet" href="./assets/css/layout.css">
 </head>
 <body>
   <div class="box" style="max-width: 450px;">
@@ -132,7 +132,7 @@ if(isset($_SESSION['user_id'])){
     <a href="./login.php" class="link">Back to Login</a>
   </div>
 
-  <!-- <script src="./js/signup.js"></script> -->
+  <!-- <script src="./assets/js/signup.js"></script> -->
   <script>
     (function(){
       var role=document.getElementById('role');

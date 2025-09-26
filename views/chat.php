@@ -5,7 +5,7 @@ if(!isset($_SESSION['user_id'])){
     exit; 
   }
 
-require_once __DIR__ . '/model/message_model.php'; 
+require_once 'model/message_model.php'; 
 $pageTitle='Chat'; 
 include __DIR__ . '/includes/header.php'; ?>
   <div class="box" style="max-width: 700px;">

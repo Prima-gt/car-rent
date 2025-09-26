@@ -1,7 +1,7 @@
 <?php 
 session_start(); 
 if(!isset($_SESSION['user_id'])){ header('Location: ./login.php'); exit; }
-require_once __DIR__ . '/model/db.php';
+require_once 'model/db.php';
 $pageTitle='Messages';
 include __DIR__ . '/includes/header.php';
 $conn=db_connect();

@@ -4,7 +4,7 @@ session_start();
 if(!isset($_SESSION['role']) || $_SESSION['role']!=='admin'){ 
   header('Location: ./login.php'); exit; 
 }
-require_once __DIR__ . '/model/db.php'; 
+require_once 'model/db.php'; 
 $conn=db_connect(); 
 include __DIR__ . '/includes/header.php';
 ?>

@@ -5,7 +5,7 @@ session_start();
   header('Location: ./login.php'); 
   exit;
  }
-require_once __DIR__ . '/model/ride_model.php'; 
+require_once 'model/ride_model.php'; 
 include __DIR__ . '/includes/header.php'; ?>
   <div class="box home-wrap">
     <div class="toolbar">

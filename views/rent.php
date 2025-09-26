@@ -5,7 +5,7 @@ if(!isset($_SESSION['user_id'])){
   exit; 
 }
  $pageTitle='Rent a Car'; 
- require_once __DIR__ . '/model/car_model.php';  
+ require_once 'model/car_model.php';  
 
 $pref = isset($_GET['car_id']) ? (int)$_GET['car_id'] : 0; 
 include __DIR__ . '/includes/header.php';

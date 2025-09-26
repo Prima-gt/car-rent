@@ -5,7 +5,7 @@ if(!isset($_SESSION['user_id'])){
   exit; 
 }
 
- require_once __DIR__ . '/model/ride_model.php';
+ require_once 'model/ride_model.php';
        $uid = isset($_SESSION['user_id'])? $_SESSION['user_id'] : 0; 
        $rides = $uid? ride_all_by_user_detailed($uid) : []; 
        
@@ -34,7 +34,7 @@ include __DIR__ . '/includes/header.php';
           <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap;">
             <a class="login-btn car-rent-btn" href="./chat.php?ride_id=<?php echo (int)$r['id']; ?>">Message</a>
             <?php if($r['status']==='completed'):
-              require_once __DIR__ . '/model/rating_model.php'; $given=rating_find_by_ride((int)$r['id']);
+              require_once 'model/rating_model.php'; $given=rating_find_by_ride((int)$r['id']);
               if($given): ?>
                 <div class="car-owner">Your rating: <?php echo (int)$given['stars']; ?>/5 - <?php echo htmlspecialchars($given['review']); ?></div>
               <?php else: ?>

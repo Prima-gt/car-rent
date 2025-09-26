@@ -1,5 +1,5 @@
 <?php 
-require_once __DIR__ . '/model/db.php';
+require_once 'model/db.php';
 if($_SERVER['REQUEST_METHOD']==='POST'){
   $email=trim($_POST['email'] ?? '');
   if(empty($email)){
@@ -32,9 +32,9 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Forgot Password</title>
-    <link rel="stylesheet" href="./css/ForgotPassword.css">
-    <link rel="stylesheet" href="./css/login.css">
-    <link rel="stylesheet" href="./css/layout.css">
+    <link rel="stylesheet" href="./assets/css/ForgotPassword.css">
+    <link rel="stylesheet" href="./assets/css/login.css">
+    <link rel="stylesheet" href="./assets/css/layout.css">
   </head>
   <body class="forget-main">
     <p><b>Enter your email to receive reset link</b></p>

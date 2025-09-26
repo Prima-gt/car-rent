@@ -13,8 +13,8 @@ if(isset($_SESSION['user_id'])){
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
-  <link rel="stylesheet" href="./css/login.css">
-  <link rel="stylesheet" href="./css/layout.css">
+  <link rel="stylesheet" href="./assets/css/login.css">
+  <link rel="stylesheet" href="./assets/css/layout.css">
 </head>
 <body>
   <div class="box">
@@ -56,7 +56,7 @@ if(isset($_SESSION['user_id'])){
     </form>
   </div>
 
-  <!-- <script src="./js/login.js"></script> -->
+  <!-- <script src="./assets/js/login.js"></script> -->
 </body>
 </html>
 

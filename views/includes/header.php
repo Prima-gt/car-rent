@@ -7,9 +7,9 @@ if(session_status()===PHP_SESSION_NONE){
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./css/login.css">
-  <link rel="stylesheet" href="./css/home.css">
-  <link rel="stylesheet" href="./css/layout.css">
+  <link rel="stylesheet" href="./assets/css/login.css">
+  <link rel="stylesheet" href="./assets/css/home.css">
+  <link rel="stylesheet" href="./assets/css/layout.css">
   <title><?php echo isset($pageTitle)? htmlspecialchars($pageTitle) : 'Car Rent'; ?></title>
 </head>
 <body>
@@ -21,7 +21,7 @@ if(session_status()===PHP_SESSION_NONE){
       <a href="./myrent.php">My Rides</a>
       <?php if(isset($_SESSION['user_id'])): ?>
         <a href="./messages.php">Messages<?php 
-          require_once __DIR__ . '/../model/db.php'; 
+          require_once   'model/db.php'; 
           $hconn=db_connect(); 
           $uid=(int)$_SESSION['user_id']; 
           $hCntRes=mysqli_query($hconn,"SELECT COUNT(*) AS c FROM messages WHERE receiver_id=$uid AND is_read=0"); 

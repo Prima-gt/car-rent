@@ -1,7 +1,7 @@
 <?php 
 session_start(); if(!isset($_GET['id'])){ header('Location: ./home.php'); exit; }
-require_once __DIR__ . '/model/car_model.php';
-require_once __DIR__ . '/model/db.php';
+require_once 'model/car_model.php';
+require_once 'model/db.php';
 $pageTitle='Car Details';
 include __DIR__ . '/includes/header.php';
 $id=(int)$_GET['id'];

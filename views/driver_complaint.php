@@ -5,7 +5,7 @@ if(!isset($_SESSION['role']) || $_SESSION['role']!=='driver'){
 }
 $pageTitle='Driver Complaint';
 include __DIR__ . '/includes/header.php';
-require_once __DIR__ . '/model/db.php';
+require_once 'model/db.php';
 ?>
   <div class="box home-wrap">
     <div class="header">File a Complaint</div>
