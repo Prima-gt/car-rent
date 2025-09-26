@@ -1,66 +1,102 @@
 <?php
-session_start(); 
 
-if(!isset($_SESSION['user_id'])){
-  header('Location: ./login.php'); 
-  exit; 
+// session_start();
+// var_dump($_SESSION['user_pic']);
+// exit();
+
+session_start();
+if (!isset($_SESSION['email'])) {
+    header('Location: login.php');
+    exit();
 }
-$pageTitle='Home'; 
 
-require_once 'model/car_model.php'; 
-require_once 'model/user_model.php';
-$user = user_find_by_id($_SESSION['user_id']);
+$firstName = isset($_SESSION['user_fname']) ? $_SESSION['user_fname'] : '';
+$profilePic = isset($_SESSION['user_pic']) ? '../assets/profile_picture/' . $_SESSION['user_pic'] : '../assets/profile_picture/default.jpg';
+?>
 
-include __DIR__ . '/includes/header.php';
- ?>
-  <!-- User Welcome Section -->
-  <div class="box" style="max-width: 600px; margin-bottom: 20px;">
-    <div style="display: flex; align-items: center; gap: 15px;">
-      <div style="flex-shrink: 0;">
-        <?php if(isset($user['profile_image']) && $user['profile_image']): ?>
-          <img src="<?php echo htmlspecialchars($user['profile_image']); ?>" alt="Profile" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover; border: 2px solid #e5e7eb;">
-        <?php else: ?>
-          <div style="width: 60px; height: 60px; border-radius: 50%; background: #f3f4f6; border: 2px solid #e5e7eb; display: flex; align-items: center; justify-content: center; color: #6b7280; font-weight: bold; font-size: 20px;">
-            <?php echo strtoupper(substr($user['name'] ?? 'U', 0, 1)); ?>
-          </div>
-        <?php endif; ?>
-      </div>
-      <div>
-        <h2 style="margin: 0; color: #1f2937; font-size: 24px;">Welcome back, <?php echo htmlspecialchars($user['name'] ?? 'User'); ?>!</h2>
-        <p style="margin: 5px 0 0 0; color: #6b7280; font-size: 14px;">Ready to find your perfect ride?</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="box home-wrap">
-    <div class="toolbar"> 
-      <a class="pill active" href="#">All</a>
-      <a class="pill" href="./myrent.php">My Rides</a>
-      <a class="pill" href="./rent.php">Quick Rent</a> 
-    </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Driver Dashboard</title>
+    <link rel="stylesheet" href="..\assets\CSS\home.css">
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyANmV3CdjF5bav4Xh6xn1LBSrgMeZADAfc&callback=initMap" async defer></script>
     
-
-    <?php $cars = cars_all_public();
-     if(!empty($cars)): ?>
-      <hr>
-      <div class="cars-title">Available Cars</div>
-      <div class="cars-grid" id="carsList">
-      <?php foreach($cars as $c): ?>
-        <div class="car-card car-item" data-name="<?php echo htmlspecialchars(strtolower($c['model'])); ?>">
-          <?php if(!empty($c['image'])): ?>
-            <img class="car-img" src="<?php echo htmlspecialchars($c['image']); ?>" alt="car">
-          <?php endif; ?>
-          <div class="car-name"><a href="./car.php?id=<?php echo (int)$c['id']; ?>" style="text-decoration:none;color:inherit;"><?php echo htmlspecialchars($c['model']); ?></a></div>
-          <div class="car-owner">Owner: <?php echo htmlspecialchars($c['owner']); ?></div>
-          <div style="display:flex;gap:8px;margin-top:8px;">
-            <a class="login-btn car-rent-btn" style="width:auto;" href="./rent.php?car_id=<?php echo (int)$c['id']; ?>">Rent</a>
-            <a class="login-btn car-rent-btn" style="width:auto;background:#111827;" href="./car.php?id=<?php echo (int)$c['id']; ?>">View</a>
-          </div>
+</head>
+<body>
+    <div class="header-container">
+        <h1 class="header-title">Driver Dashboard</h1>
+        <div class="header-links">
+            <div class="user-info">
+                <img src="<?php echo htmlspecialchars($profilePic); ?>" alt="Profile Picture" class="profile-pic">
+                <a href="profile.php" class="user-fname-link"><?php echo htmlspecialchars($firstName); ?></a>
+            </div>
+            <a href="Ride_his.html" class="header-link">History</a>
+            <a href="complaint.html" class="header-link">Complaint</a>
+            <a href="../controllers/logout_action.php" class="header-link">Logout</a>
         </div>
-      <?php endforeach; ?>
-      </div>
-    <?php endif; ?>
-  </div>
- 
-<?php include __DIR__ . '/includes/footer.php'; ?>
+    </div>
+    <div class="content-container">
+        <div class="main-content">
+            <div class="map-box">
+                <div id="map"></div>
+            </div>
+            <div class="right-column">
+                <div class="dashboard-info">
+                    <div class="info-title">TOTAL EARNINGS TODAY</div>
+                    <div class="info-value">2579Tk</div>
+                </div>
+                <div class="jobs-list">
+                    <div class="jobs-list-header">
+                        <h2 class="section-heading">Jobs Available (3)</h2>
+                        <a href="Ride_his.html" class="history-link">Ride History</a>
+                    </div>
+                    <div class="job-card">
+                        <div class="job-details">
+                            <h3 class="job-title">Rider 1</h3>
+                            <p class="job-text">5.2 km away</p>
+                        </div>
+                        <div class="job-buttons">
+                            <span class="job-earning">532Tk</span>
+                            <a href="ride_info.html" class="accept-btn">Accept</a>
+                            <button class="cancel-btn">Cancel</button>
+                        </div>
+                    </div>
+                    <div class="job-card">
+                        <div class="job-details">
+                            <h3 class="job-title">Rider 2</h3>
+                            <p class="job-text">8.1 km away</p>
+                        </div>
+                        <div class="job-buttons">
+                            <span class="job-earning">849Tk</span>
+                            <a href="ride_info.html" class="accept-btn">Accept</a>
+                            <button class="cancel-btn">Cancel</button>
+                        </div>
+                    </div>
+                    <div class="job-card">
+                        <div class="job-details">
+                            <h3 class="job-title">Rider 3</h3>
+                            <p class="job-text">2.5 km away</p>
+                        </div>
+                        <div class="job-buttons">
+                            <span class="job-earning">266Tk</span>
+                            <a href="ride_info.html" class="accept-btn">Accept</a>
+                            <button class="cancel-btn">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+    function initMap() {
+        const map = new google.maps.Map(document.getElementById("map"), {
+            center: { lat: 23.8221, lng: 90.4274 },
+            zoom: 12,
+        });
+    }
 
+</script>
+</body>
+</html>

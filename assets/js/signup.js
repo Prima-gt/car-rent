@@ -1,16 +1,16 @@
-// function validateForm() {
+function validateForm() {
+  let profilePicture = document.getElementById("profile_picture").files;
   let firstname = document.getElementById("firstname").value.trim();
   let lastname = document.getElementById("lastname").value.trim();
   let dob = document.getElementById("dob").value.trim();
-  let licenseEl = document.getElementById("license");
-  let license = licenseEl ? licenseEl.value.trim() : '';
+  let license = document.getElementById("license").value.trim();
   let email = document.getElementById("email").value.trim();
   let password = document.getElementById("password").value;
   let confirm = document.getElementById("confirm").value;
-  let role = document.getElementById("role").value;
 
   let valid = true;
 
+  document.getElementById("profilePicError").innerHTML = "";
   document.getElementById("firstError").innerHTML = "";
   document.getElementById("lastError").innerHTML = "";
   document.getElementById("dobError").innerHTML = "";
@@ -20,6 +20,11 @@
   document.getElementById("confirmError").innerHTML = "";
   document.getElementById("formError").innerHTML = "";
 
+  if (profilePicture.length === 0) {
+    document.getElementById("profilePicError").innerHTML = "Please select a profile picture.";
+    valid = false;
+  }
+  
   if (firstname === "" || firstname.length < 2) {
     document.getElementById("firstError").innerHTML = "First name must be at least 2 characters.";
     valid = false;
@@ -35,15 +40,9 @@
     valid = false;
   }
 
-  if (role === 'driver') {
-    if (license === "" || license.length < 6 || license.length > 15) {
-      document.getElementById("licenseError").innerHTML = "License number must be 6–15 characters.";
-      valid = false;
-    }
-    var carModel = document.getElementById('car_model').value.trim();
-    var carOwner = document.getElementById('car_owner').value.trim();
-    if (carModel === "") { document.getElementById('carModelError').innerHTML = 'Car model required.'; valid = false; }
-    if (carOwner === "") { document.getElementById('carOwnerError').innerHTML = 'Car owner required.'; valid = false; }
+  if (license === "" || license.length < 6 || license.length > 15) {
+    document.getElementById("licenseError").innerHTML = "License number must be 6–15 characters.";
+    valid = false;
   }
 
   let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -69,5 +68,3 @@
 
   return true;
 }
-
-

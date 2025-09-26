@@ -1,100 +1,103 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f5f7fa;
+    background-color: #DBE4C9;
     margin: 0;
     padding: 0;
-}
-
-.box {
+  }
+  
+  .box {
     max-width: 350px;
     margin: 100px auto;
     padding: 32px;
-    background: #ffffff;
+    background: #556B2F;
     border-radius: 10px;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-}
-
-.header {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .header {
     font-size: 28px;
     font-weight: bold;
     margin-bottom: 20px;
-    color: #222222;
+    color: #DCFFB7;
     text-align: center;
-}
-
-.form-group {
+  }
+  
+  .form-group {
     margin-bottom: 10px;
-}
-
-label {
+  }
+  
+  label {
     display: block;
     margin-bottom: 3px;
     font-weight: bold;
-    color: #333333;
-}
-
-input[type="text"],
-input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    box-sizing: border-box;
-}
-
-.login-btn {
+    color: #EFF5D2;
+  }
+  
+  input[type="text"],
+  input[type="password"],
+  input[type="email"] { 
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+  }
+  
+  .login-btn {
     width: 100%;
     padding: 12px;
-    background-color: #2563eb;
-    color: #ffffff;
+    background-color: #C6D870;
+    color: #0A400C;
     border: none;
     border-radius: 6px;
-    font-size: 16px;
+    font-size: 17px;
     cursor: pointer;
-}
-
-.login-btn:hover {
-    background-color: #1d4ed8;
-}
-
-.link {
+  }
+  
+  .login-btn:hover {
+    background-color: #D9EDBF;
+  }
+  
+  .link {
     display: block;
     text-align: center;
     margin-top: 12px;
     font-size: 14px;
-    color: #2563eb;
+    color: #DCFFB7;
     text-decoration: none;
-}
-
-.link:hover {
+  }
+  
+  .link:hover {
     text-decoration: underline;
-}
-
-hr {
+  }
+  
+  hr {
     margin: 20px 0;
-}
-
-.create-btn {
+  }
+  
+  .create-btn {
     width: 93%;
     display: block;
     text-align: center;
     padding: 12px;
-    background-color: #111827;
+    background-color: #27391C;
     color: white;
     border: none;
     border-radius: 6px;
     font-size: 16px;
     cursor: pointer;
     text-decoration: none;
-}
+  }
+  
+  .create-btn:hover {
+    background-color: #185b0d;
 
-.create-btn:hover {
-    background-color: #0b1220;
-}
-
-.error {
+  }
+  .error {
     color: red;
     font-size: 12px;
     display: block;
     margin-top: 4px;
-}
+  }
+  
+  

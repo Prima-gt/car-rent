@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Change Password</title>
+    <link rel="stylesheet" href="..\assets\CSS\login.css">
+</head>
+<body>
+
+    <div class="box">
+        <div class="header">Change Password</div>
+        <form id="changePasswordForm" action="../controllers/change_pass_action.php" method="POST">
+            
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+                <span class="error" id="emailError"></span> 
+            </div>
+
+            <div class="form-group">
+                <label for="oldPassword">Old Password</label>
+                <input type="password" id="oldPassword" name="oldPassword" required>
+                <span class="error" id="oldPasswordError"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="newPassword">New Password</label>
+                <input type="password" id="newPassword" name="newPassword" required>
+                <span class="error" id="newPasswordError"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="confirmNewPassword">Confirm New Password</label>
+                <input type="password" id="confirmNewPassword" name="confirmNewPassword" required>
+                <span class="error" id="confirmNewPasswordError"></span>
+            </div>
+            
+            <button type="submit" class="login-btn">Change Password</button>
+        </form>
+
+        <a href="login.php" class="link">Back to Login</a>
+    </div>
+
+    <script src="..\assets\Javascript\change_pass.js"></script>
+</body>
+</html>

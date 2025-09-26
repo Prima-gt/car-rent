@@ -1,0 +1,239 @@
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #DBE4C9;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+.header-container {
+    background-color: #556B2F;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    border-bottom: 2px solid #C6D870;
+}
+
+.header-title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #DCFFB7;
+    margin: 0;
+}
+
+.header-links .header-link {
+    background-color: #C6D870;
+    color: #556B2F;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.header-links .header-link:hover {
+    background-color: #D9EDBF;
+}
+
+.main-content {
+    display: flex;
+    gap: 25px;
+    padding: 25px;
+    height: calc(100vh - 100px); 
+    box-sizing: border-box;
+}
+
+.left-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.rider-info-box, .chat-box, .earning-box {
+    background: #556B2F;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    color: #EFF5D2;
+}
+
+.rider-info-box {
+    height: 350px;
+}
+
+.rider-details-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.profile-pic {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-right: 15px;
+    border: 3px solid #C6D870;
+}
+
+.rider-header-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.rider-name {
+    font-size: 24px;
+    font-weight: bold;
+    color: #DCFFB7;
+    margin: 0;
+}
+
+.current-rider {
+    font-size: 14px;
+    color: #DCFFB7;
+    margin: 0;
+}
+
+.rider-info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.info-label {
+    font-weight: bold;
+    font-size: 14px;
+    color: #D9EDBF;
+    margin: 0;
+}
+
+.info-value {
+    font-size: 16px;
+    color: #EFF5D2;
+    margin: 0;
+}
+
+
+.chat-box {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.chat-header {
+    font-size: 18px;
+    font-weight: bold;
+    color: #DCFFB7;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.chat-messages {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: auto;
+    padding-right: 10px;
+    margin-bottom: 10px;
+}
+
+.message-sent {
+    background-color: #798C58;
+    color: #EFF5D2;
+    padding: 8px 12px;
+    border-radius: 15px 15px 0 15px;
+    align-self: flex-start;
+    max-width: 75%;
+}
+
+.message-received {
+    background-color: #C6D870;
+    color: #556B2F;
+    padding: 8px 12px;
+    border-radius: 15px 15px 15px 0;
+    align-self: flex-end;
+    max-width: 75%;
+}
+
+.chat-input-container {
+    display: flex;
+    gap: 10px;
+}
+
+.chat-input {
+    flex: 1;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    background-color: #D9EDBF;
+    color: #556B2F;
+}
+
+.chat-send-btn {
+    padding: 10px 20px;
+    background-color: #C6D870;
+    color: #556B2F;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.earning-box {
+    text-align: center;
+}
+
+.earning-header {
+    font-size: 18px;
+    font-weight: bold;
+    color: #DCFFB7;
+    margin: 0 0 10px 0;
+}
+
+.earning-amount {
+    font-size: 36px;
+    font-weight: bold;
+    color: #C6D870;
+    margin: 0;
+}
+
+.earning-note {
+    font-size: 12px;
+    color: #EFF5D2;
+    margin: 0;
+}
+
+.right-section {
+    flex: 2;
+    background: #556B2F;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.map-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#map {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px; 
+}
