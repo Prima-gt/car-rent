@@ -21,7 +21,7 @@ $profilePic = isset($_SESSION['user_pic']) ? '../assets/profile_picture/' . $_SE
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Driver Dashboard</title>
     <link rel="stylesheet" href="..\assets\CSS\home.css">
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyANmV3CdjF5bav4Xh6xn1LBSrgMeZADAfc&callback=initMap" async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=KEY_HIDDEN&callback=initMap" async defer></script>
     
 </head>
 <body>
@@ -99,4 +99,5 @@ $profilePic = isset($_SESSION['user_pic']) ? '../assets/profile_picture/' . $_SE
 
 </script>
 </body>
+
 </html>
