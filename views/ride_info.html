@@ -49,17 +49,17 @@
             </div>
             <div class="chat-box">
                 <h2 class="chat-header">Chat with Rider</h2>
-                <div class="chat-messages">
+                <div class="chat-messages" id="chat-messages">
                     <div class="message-sent">
-                        I'm about 2 minutes away.
+                        How far are you?
                     </div>
                     <div class="message-received">
-                        Ok waiting!
+                        Im 5 minutes away!
                     </div>
                 </div>
                 <div class="chat-input-container">
-                    <input type="text" placeholder="Type your message..." class="chat-input">
-                    <button class="chat-send-btn">Send</button>
+                    <input type="text" placeholder="Type your message..." class="chat-input" id="chat-input">
+                    <button class="chat-send-btn" id="send-button">Send</button>
                 </div>
             </div>
             <div class="earning-box">
@@ -76,13 +76,66 @@
     </div>
 
     <script>
-    function initMap() {
-        const map = new google.maps.Map(document.getElementById("map"), {
-            center: { lat: 23.8221, lng: 90.4274 },
-            zoom: 12,
-        });
-    }
-</script>
+        function initMap() {
+            const map = new google.maps.Map(document.getElementById("map"), {
+                center: { lat: 23.8221, lng: 90.4274 },
+                zoom: 12,
+            });
+        }
 
+        document.addEventListener('DOMContentLoaded', function() {
+            const sendButton = document.getElementById('send-button');
+            const chatInput = document.getElementById('chat-input');
+            const chatMessages = document.getElementById('chat-messages');
+
+            sendButton.addEventListener('click', sendMessage);
+            chatInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+
+            function sendMessage() {
+                const message = chatInput.value.trim();
+                const dummyResponse = "I'm almost here, Please wait at your pickup location";
+
+                if (message === '') {
+                    return;
+                }
+
+                const sentMessageElement = document.createElement('div');
+                sentMessageElement.classList.add('message-sent');
+                sentMessageElement.textContent = message;
+                chatMessages.appendChild(sentMessageElement);
+
+                setTimeout(() => {
+                    const receivedMessageElement = document.createElement('div');
+                    receivedMessageElement.classList.add('message-received');
+                    receivedMessageElement.textContent = dummyResponse;
+                    chatMessages.appendChild(receivedMessageElement);
+                    chatMessages.scrollTop = chatMessages.scrollHeight; 
+                }, 500); 
+
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+
+                chatInput.value = '';
+
+                const xhr = new XMLHttpRequest();
+                xhr.open('GET', '../controllers/chat_handler.php?message=' + encodeURIComponent(message), true);
+                
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === XMLHttpRequest.DONE) {
+                        if (xhr.status === 200) {
+                            console.log('Message sent successfully!');
+                        } else {
+                            console.error('Error sending message:', xhr.status);
+                        }
+                    }
+                };
+                
+                xhr.send();
+            }
+        });
+    </script>
 </body>
 </html>
