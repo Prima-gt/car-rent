@@ -8,6 +8,7 @@ $password = htmlspecialchars($_POST['password']);
 
 $isValid = true;
 $successURL = "Location: ../views/home.php";
+$successURL2 = "Location: ../views/admin.php";
 $errorURL = "Location: ../views/login.php?login_failed";
 
 if (empty($username)) {
@@ -29,6 +30,16 @@ if ($isValid) {
             setcookie('remembered_user', $username, time() + (86400 * 30), "/");
         } 
         header($successURL);
+        exit();
+    }
+    else if ($username === 'admin' && $password === "admin") {
+        $_SESSION['email'] = $username;
+        $_SESSION['user_fname'] = 'admin';
+        $_SESSION['user_pic'] = '../123/assets/profile_picture/default.jpg';
+        if (isset($_POST['rememberMe'])) {
+            setcookie('remembered_user', $username, time() + (86400 * 30), "/");
+        } 
+        header($successURL2);
         exit();
     }
     else {
@@ -63,3 +74,4 @@ header($errorURL);
 exit();
 
 ?>
+
