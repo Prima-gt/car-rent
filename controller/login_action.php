@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-require_once('../models/userModel.php');
+require_once('../model/userModel.php');
 
 $username = htmlspecialchars($_POST['email']);
 $password = htmlspecialchars($_POST['password']);
@@ -74,4 +74,5 @@ header($errorURL);
 exit();
 
 ?>
+
 
